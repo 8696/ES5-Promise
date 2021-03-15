@@ -4,11 +4,11 @@
 
 - Promise-polyfill
 
-#### 测试
+#### IE下测试
+
+- 基础函数
 
 ```javascript
-
-  // IE下
   function getData(status) {
     return new Promise(function (resolve, reject) {
       setTimeout(function () {
@@ -27,8 +27,11 @@
       }, 500);
     });
   }
+```
 
-  // *** 001
+- 基本用法
+
+```javascript
   getData()
     .then(function (res) {
       console.log(res);
@@ -39,9 +42,11 @@
     .finally(function () {
       console.log('finally');
     });
+```
 
+- Promise.all
 
-  // *** 002
+```javascript
   var promiseAll = Promise.all([
     getData(true),
     getData(true),
@@ -61,9 +66,11 @@
     .catch(function (err) {
       console.error(err);
     });
+```
 
+- Promise.race
 
-  // *** 003
+```javascript
   var promiseRace = Promise.race([
     getData(true),
     getData(true),
@@ -82,18 +89,16 @@
     .catch(function (err) {
       console.error(err); // 200毫秒后
     });
+```
 
+- Promise.resolve
 
-  // *** 004
-
+```javascript
   Promise.resolve([1, 2])
     .then(function (res) {
       console.log(res); // [1, 2]
     });
-
-
-  // *** 005
-
+  
   Promise.resolve([1, 2])
     .then(function (res) {
       console.log(abc); // abc is not defined
@@ -101,23 +106,14 @@
     .catch(function (err) {
       console.log(err); // err msg
     });
+```
 
+- Promise.reject
 
-  // *** 006
-
+```javascript
   Promise.reject('reject status msg')
     .catch(function (err) {
       console.log(err);   // 'reject status msg'
     });
-
-
-  // *** 007
-  // 仅不支持原生Promise下，例：IE
-
-  console.log(Promise === PromiseES5); // true
-
-
-
-
 ```
 
